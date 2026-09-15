@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from classifier import classify_problem
 from algorithms.bfs import bfs
 from algorithms.dfs import dfs
+from algorithms.astar import astar
 
 app = FastAPI(title="AEGIS")
 
@@ -39,4 +40,16 @@ def depth_first(start: str, goal: str):
         "start": start,
         "goal": goal,
         "path": path
+    }
+@app.get("/astar")
+def optimal_route(start: str, goal: str):
+
+    path, cost = astar(start, goal)
+
+    return {
+        "algorithm": "A* Search",
+        "start": start,
+        "goal": goal,
+        "optimal_path": path,
+        "total_cost": cost
     }
