@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from classifier import classify_problem
 from algorithms.bfs import bfs
+from algorithms.dfs import dfs
 
 app = FastAPI(title="AEGIS")
 
@@ -27,4 +28,15 @@ def shortest_path(start: str, goal: str):
         "start": start,
         "goal": goal,
         "shortest_path": path
+    }
+@app.get("/dfs")
+def depth_first(start: str, goal: str):
+
+    path = dfs(start, goal)
+
+    return {
+        "algorithm": "Depth First Search",
+        "start": start,
+        "goal": goal,
+        "path": path
     }
