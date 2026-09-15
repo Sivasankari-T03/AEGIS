@@ -4,6 +4,7 @@ from algorithms.bfs import bfs
 from algorithms.dfs import dfs
 from algorithms.astar import astar
 from algorithms.backtracking import solve
+from algorithms.forward_chaining import forward_chain
 
 app = FastAPI(title="AEGIS")
 
@@ -74,4 +75,16 @@ def sudoku_demo():
     return {
         "algorithm":"Backtracking",
         "solution":board
+    }
+@app.get("/expert")
+def expert_system():
+
+    facts = ["fever", "cough"]
+
+    result = forward_chain(facts)
+
+    return {
+        "algorithm": "Forward Chaining",
+        "input_facts": facts,
+        "inference": result
     }
